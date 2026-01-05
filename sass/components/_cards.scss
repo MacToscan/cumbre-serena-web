@@ -1,0 +1,52 @@
+@use "../base/variables" as *;
+
+.card {
+  background: $color-bg-alt;
+  border-radius: $radius;
+  overflow: hidden;
+  box-shadow: $color-bg;
+  transition: .3s;
+  flex-shrink: 0; /* IMPORANTE: Evita que la tarjeta se encoja */
+  width: 264px; /* Define el ancho visible de la tarjeta. AJUSTA ESTE VALOR */
+  scroll-snap-align: start; /* Ayuda a que la tarjeta se alinee perfectamente al detener el scroll */
+
+  &:hover {
+    transform: translateY(-25px);
+  }
+
+  img {
+    height: 400px;
+    object-fit: cover;
+    width: 100%;
+    transition: 1.4s;
+  }
+
+  &:hover img {
+    transform: scale(1.15);
+    
+  }
+
+  .card-body {
+    padding: 1rem;
+    background: linear-gradient(180deg, $color-bg-alt, $color-bg-alt);
+
+    h3 {
+      font-family: $font-title;
+      color: $color-text;
+      margin: .5rem 0;
+    }
+
+    p {
+      color: $color-secondary;
+    }
+
+    .link {
+      color: $color-red;
+      font-weight: 600;
+
+    &:hover img {
+    transform: scale(1.15);
+  }
+    }
+  }
+}

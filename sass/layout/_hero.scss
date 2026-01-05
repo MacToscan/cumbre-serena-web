@@ -1,0 +1,509 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as *;
+
+/* =========================================
+   1. HERO SECTION: VIDEO INTRO
+   ========================================= */
+
+#video-intro-section {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: $color-bg;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; /* Alinea el contenido (la flecha) abajo */
+    z-index: 200;
+
+    /* --- VIDEO DE FONDO --- */
+    /* --- VIDEO DE FONDO (ESTILO FRAMED / A CONTRACORRIENTE) --- */
+    #bg-video {
+        position: absolute;
+        // Centrado perfecto
+        top: 50%;  // Ajuste vertical para compensar la alineación del contenido
+        left: 50%;
+        transform: translate(-50%, -50%);
+        
+        // DIMENSIONES: Aquí está la magia del marco
+        width: 80%;           // Deja un 3% de margen a cada lado
+        height: 75vh;         // Altura controlada, no toca los bordes verticales
+        object-fit: cover;    // Asegura que el vídeo rellene el marco sin deformarse
+        
+        // ESTÉTICA
+        border-radius: 20px;  // Esquinas redondeadas
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); // Sombra de profundidad
+        opacity: 0.8;
+        
+        // Transición suave para cuando cambies de vídeo con las flechas
+        transition: opacity 0.3s ease; 
+
+        // AJUSTE PARA MÓVIL (Para no perder tanto espacio en pantallas pequeñas)
+        @media (max-width: 768px) {
+            width: 96%;
+            height: 80vh; 
+            border-radius: 12px;
+        }
+    }
+
+    /* --- CONTENIDO FLOTANTE (Flecha y Textos) --- */
+    .video-overlay-content {
+        font-family: $font-body;
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        width: 100%;
+        pointer-events: none; /* Click-through */
+
+        a {
+            color: $color-text;
+            font-size: 0.8rem;
+            text-decoration: none;
+            pointer-events: auto; /* Reactivamos click en enlaces */
+        }
+    }
+
+    .scroll-down-hint {
+        color: rgba(255, 255, 255, 0.6);
+        font-family: $font-body;
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        animation: fadeInUp 2s infinite;
+        text-transform: uppercase;
+    }
+
+    /* --- BOTONES DE CONTROL --- */
+    
+    /* Botón Replay (Centro) */
+    .replay-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 30;
+        
+        background: rgba(0, 0, 0, 0.7);
+        border: 2px solid $color-accent; 
+        color: white;
+        padding: 15px 30px;
+        font-family: $font-title; 
+        font-size: 1.2rem;
+        letter-spacing: 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        &:hover {
+            color: black;
+            box-shadow: 0 0 20px rgba($color-accent, 0.5);
+            
+        }
+        
+        i { font-size: 1.4rem; }
+    }
+
+    /* Wrapper de controles (Esquina inferior derecha) */
+    .video-controls-wrapper {
+        position: absolute;
+        bottom: 50px;
+        right: 50px;
+        z-index: 20;
+        display: flex;
+        gap: 15px;
+    }
+
+    /* Estilo común de botones pequeños */
+    .control-btn {
+        background: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        color: white;
+        padding: 10px;
+        border-radius: 50px;
+        cursor: pointer;
+        font-family: $font-body;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        min-width: 40px;
+        justify-content: center;
+
+        &:hover {
+            background: $color-accent; 
+            border-color: $color-accent;
+            color: white;
+        }
+    }
+}
+
+/* Animación Flecha */
+@keyframes fadeInUp {
+    0%, 100% { opacity: 0.4; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(-10px); }
+}
+
+
+/* =========================================
+   2. HERO SCROLL FRAMES (EFECTO PARALLAX)
+   ========================================= */
+
+.hero {
+    height: 520vh; 
+    position: relative;
+    overflow: hidden; 
+    background-color: $color-bg; 
+    color: #000;
+
+    // Variables Base (Desktop Default) - NO TOCAR
+    --logo-y: -26vh;
+    --frame2-x: -30vw; --frame2-y: -22vh;
+    --frame3-x: -35vw; --frame3-y: 9vh;
+    --frame4-x: -18vw; --frame4-y: 30vh;
+    --frame5-x: 10vw;  --frame5-y: 35vh;
+    --frame6-x: 30vw;  --frame6-y: 20vh;
+    --frame7-x: 33vw;  --frame7-y: -20vh;
+}
+
+#content-curtain {
+    position: relative; 
+    z-index: 20; 
+    background-color: $color-bg; 
+}
+
+/* Contenido Sticky (Texto que aparece) */
+.hero-sticky-content {
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%) scale(0.9); 
+    width: 80%; 
+    max-width: 600px;
+    padding: 0 1rem;
+    text-align: center;
+    z-index: 10; 
+    opacity: 0; 
+    visibility: hidden;
+    transition: opacity 0.5s ease, transform 0.5s ease; 
+
+    h1 { 
+        font-family: $font-title;
+        font-size: 1.7rem;
+        color: $color-accent; 
+        margin-bottom: 0.5rem;
+    }
+    .lead {
+        color: $color-muted;
+        padding: 10px;
+        font-size: 1.2rem;
+        font-style: italic;
+        z-index: 1;
+    }
+    .hero-actions {
+        display: flex;
+        justify-content: center;
+        gap: 5rem;
+    }
+    .hero-actions .btn {
+        @include button($color-muted, $color-text);
+        padding: 5px 8px;
+    }
+}
+
+/* Indicador de Scroll (Ratón/Flecha) */
+.scroll-indicator {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+}
+
+.scroll-arrow {
+    width: 15px;
+    height: 15px;
+    border-right: 2px solid $color-accent;
+    border-bottom: 2px solid $color-accent;
+    transform: rotate(45deg);
+    margin-top: 10px;
+    animation: arrow-blink 2s infinite;
+}
+
+.indicator-hidden {
+    opacity: 0 !important;
+    transform: translate(-50%, 40px) scale(0.8);
+}
+
+@keyframes arrow-blink {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Wrapper de Imágenes */
+.image-frame-wrapper {
+    position: fixed; 
+    top: 0; left: 0; width: 100%; height: 100vh;
+    pointer-events: none; 
+    z-index: 20; 
+    
+    &.is-fixed { position: fixed; }
+}
+
+/* Estilos Base de los Frames */
+.frame-layer {
+    position: absolute;
+    width: 250px; 
+    height: 180px; 
+    border-radius: 15px; 
+    opacity: 0;
+    will-change: transform, opacity;
+    overflow: hidden;
+    z-index: 15;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%); 
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+    
+    img {
+        width: 100%; height: 100%; object-fit: cover;
+    }
+
+    /* Logo Central (Frame 1) */
+    &[data-frame-id="1"] {
+        width: 200px; height: 200px;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        z-index: 18;
+        overflow: visible !important;
+        
+        img { object-fit: contain; }
+        --final-x: 0vw; 
+        --final-y: var(--logo-y); 
+        --rot: 0deg; 
+    }
+    
+    /* Frames Satélites - Configuración Base */
+    &[data-frame-id="2"] { width: 250px; height: 180px; --final-x: var(--frame2-x); --final-y: var(--frame2-y); --rot: 0deg; } 
+    &[data-frame-id="3"] { width: 160px; height: 160px; --final-x: var(--frame3-x); --final-y: var(--frame3-y); --rot: 0deg; } 
+    &[data-frame-id="4"] { --final-x: var(--frame4-x); --final-y: var(--frame4-y); --rot: 0deg; } 
+    &[data-frame-id="5"] { width: 180px; --final-x: var(--frame5-x); --final-y: var(--frame5-y); --rot: 0deg; }  
+    &[data-frame-id="6"] { height: 200px; --final-x: var(--frame6-x); --final-y: var(--frame6-y); --rot: 0deg; }  
+    &[data-frame-id="7"] { width: 280px; --final-x: var(--frame7-x); --final-y: var(--frame7-y); --rot: 0deg; }    
+}
+
+
+/* =========================================
+   3. RESPONSIVE DESIGN & MEDIA QUERIES
+   ========================================= */
+
+/* --- TABLETS, SURFACE DUO Y IPAD HORIZONTAL/VERTICAL --- */
+/* Unificamos todas las reglas para pantallas < 1180px y ratios cuadrados */
+@media (max-width: 1180px), (max-aspect-ratio: 16/10) {
+    
+    /* A. VIDEO ADAPTATIVO (Evita cortes) */
+    #video-intro-section {
+        height: 50vh; 
+        min-height: 300px;
+        align-items: flex-end;
+        background: #000;
+        
+        #bg-video {
+            object-fit: contain; /* Se ve entero */
+            top: 50%; 
+            transform: translate(-50%, -50%);
+            width: 100%; height: 100%;
+        }
+
+        /* Controles compactos */
+        .video-controls-wrapper {
+            bottom: 15px; right: 15px; gap: 8px;
+            
+            .control-btn {
+                padding: 8px 12px;
+                min-width: auto;
+                font-size: 0.7rem;
+                span { display: none; } /* Solo iconos */
+                i { font-size: 1rem; margin: 0; }
+            }
+        }
+
+        #fullscreen-btn { display: flex; }
+    }
+
+    /* B. LOGO REUBICADO (Abajo -> Centro) */
+    .frame-layer[data-frame-id="1"] {
+        top: 75% !important; /* Empieza abajo en el hueco negro */
+        --final-y: -45vh !important; /* Sube mucho más al hacer scroll */
+        --final-x: 0vw !important;
+    }
+
+    /* C. AJUSTES DE FRAMES SATÉLITES */
+    .frame-layer[data-frame-id="2"] { --final-y: -20vh !important; --final-x: -30vw !important; }
+    .frame-layer[data-frame-id="7"] { --final-y: -19vh !important; --final-x: 30vw !important; }
+}
+
+
+/* --- PANTALLAS PEQUEÑAS (Laptop Low Res) --- */
+@media (max-width: 1399px) { 
+    .frame-layer { width: 180px; height: 120px; }
+    .frame-layer[data-frame-id="1"] { width: 150px; height: 150px; }
+    .frame-layer[data-frame-id="7"] { width: 220px; }
+    
+    .hero {
+        --logo-y: -28vh;
+        --frame2-x: -30vw; --frame2-y: -22vh; 
+        --frame3-x: -35vw; --frame3-y: 9vh;   
+        --frame4-x: -18vw; --frame4-y: 30vh;  
+        --frame5-x: 8vw;   --frame5-y: 35vh;  
+        --frame6-x: 30vw;  --frame6-y: 20vh;  
+        --frame7-x: 30vw;  --frame7-y: -20vh; 
+    }
+
+    .hero-sticky-content {
+        transform: translate(-50%, -50%) scale(1);
+        h1 { font-size: 1.3rem; }
+        .hero-actions { gap: 3rem; }
+    }
+}
+
+
+/* --- TABLET VERTICAL / PHABLET --- */
+@media (max-width: 900px) {
+    .hero-sticky-content {
+        max-width: 450px;
+        h1 { font-size: 1.5rem; }
+        .hero-actions { gap: 2rem; }
+    }
+    
+    .frame-layer[data-frame-id="1"] { width: 160px; height: 160px; }
+    
+    /* Reajuste de dispersión */
+    .frame-layer[data-frame-id="1"] { --final-x: 0vw; --final-y: -20vh; }
+    .frame-layer[data-frame-id="2"] { --final-x: -35vw; --final-y: -15vh; }
+    .frame-layer[data-frame-id="3"] { --final-x: -38vw; --final-y: 5vh; }
+    .frame-layer[data-frame-id="4"] { --final-x: -20vw; --final-y: 25vh; }
+    .frame-layer[data-frame-id="5"] { --final-x: 15vw; --final-y: 25vh; }
+    .frame-layer[data-frame-id="6"] { width: 140px; --final-x: 38vw; --final-y: 0vh; }
+    .frame-layer[data-frame-id="7"] { --final-x: 28vw; --final-y: -15vh; }
+}
+
+
+/* --- MÓVIL (SÓLO LO ESPECÍFICO DE UI, el video ya lo arregla la regla de 1180px) --- */
+@media (max-width: 500px) {
+    .hero { height: 450vh; }
+    
+    .hero-sticky-content {
+        width: 95%; 
+        top: 68%;
+        padding: 0 0.5rem;
+        h1 { font-size: 1.2rem; }
+        .lead { font-size: 0.9rem; }
+        .hero-actions { flex-direction: column; gap: 0.8rem; }
+    }
+
+    /* Ocultamos frames complejos en móvil puro para limpiar la vista */
+    .frame-layer:not([data-frame-id="1"]) {
+        opacity: 0 !important; width: 0px; height: 0px;
+        box-shadow: none; transition: none !important; 
+    }
+    
+    .frame-layer[data-frame-id="1"] { 
+        width: 220px; height: 220px;
+        will-change: transform, opacity, filter;
+        --final-x: 0vw; --final-y: -20vh; --rot: 0deg; 
+    }
+}
+
+// =========================================
+// 4. FLECHAS DEL SLIDER DE VIDEO (FUTURO)
+// =========================================
+.hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.4); // Semitransparente por defecto
+    border: none;
+    font-size: 3rem;
+    padding: 2rem;
+    cursor: pointer;
+    z-index: 950; // Por encima de todo
+    transition: all 0.3s ease;
+    
+    // Icono
+    i {
+        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+
+    &:hover {
+        color: $color-accent; // Se ilumina con tu color corporativo
+        transform: translateY(-50%) scale(1.1); // Pequeño efecto zoom
+        background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, transparent 70%); // Sutil sombra
+    }
+
+    // Posicionamiento
+    &.hero-prev { left: 0; }
+    &.hero-next { right: 0; }
+
+    // En móvil las hacemos más pequeñas
+    @media (max-width: 768px) {
+        font-size: 2rem;
+        padding: 1rem;
+    }
+}
+
+// =========================================
+// 5. PAGINACIÓN DE VIDEO (PUNTITOS)
+// =========================================
+
+// Contenedor de los puntos
+.hero-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px; // Separación entre puntos
+    margin-bottom: 20px; // Espacio entre los puntos y el texto "Descubre más"
+    pointer-events: auto; // Para que se puedan clicar
+}
+
+// El punto individual
+.hero-dot {
+    width: 6px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.3); // Blanco semitransparente
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.8);
+        transform: scale(1.1);
+    }
+
+    // Estado Activo (El video actual)
+    &.active {
+        background-color: $color-accent; // Se pone de tu color corporativo
+        transform: scale(1.3); // Un pelín más grande
+        box-shadow: 0 0 10px rgba($color-accent, 0.5);
+    }
+}
+
+// Ajuste de posición vertical
+#video-intro-section .video-overlay-content {
+    // MENOS padding = MÁS abajo.
+    // Antes tenías 40px. Prueba con 15px o 20px para bajarlo.
+    padding-bottom: 10px; 
+}
+
+// Separación entre los puntitos y el texto
+.hero-dots {
+    // Esto empuja los puntitos hacia arriba para separarlos del texto
+    margin-bottom: 10px; 
+}

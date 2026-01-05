@@ -1,0 +1,78 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as *;
+
+.error-page {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    // Asegúrate de tener esta imagen en tu carpeta img/
+    background: url('../img/ruido-tv.gif') no-repeat center center;
+    background-size: cover;
+    
+    position: relative;
+    overflow: hidden;
+}
+
+.error-overlay {
+    background: rgba(0, 0, 0, 0.85); // Oscurecemos mucho el fondo para legibilidad
+    position: absolute; 
+    inset: 0;
+    z-index: 1;
+}
+
+.error-content {
+    position: relative; 
+    z-index: 10;
+    padding: 2rem;
+    max-width: 600px;
+
+    img {
+    width: 150px;
+    margin-bottom: 2rem;
+    justify-self: center
+}}
+
+.error-code {
+    font-family: 'Montserrat', sans-serif; // O usa $font-title si lo tienes configurado así
+    font-size: clamp(6rem, 15vw, 10rem); // Tamaño responsivo gigante
+    font-weight: 800;
+    color: $color-accent; // Usamos tu variable (que es #00A896)
+    line-height: 1;
+    margin-bottom: 0;
+    text-shadow: 0 0 30px rgba($color-accent, 0.4); // Efecto de neón/resplandor
+}
+
+.error-page h1 { 
+    font-family: 'Barlow', sans-serif; 
+    color: white; 
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.error-page p { 
+    color: #ccc; 
+    margin-bottom: 3rem; 
+    font-family: 'Barlow', sans-serif; 
+    font-size: 1.1rem;
+}
+
+// Botón específico para esta página
+.btn-error {
+    @include button(transparent, white); // Usamos tu mixin de botón
+    border: 1px solid white;
+    padding: 15px 30px;
+    
+    &:hover {
+        background-color: transparent;
+        color: $color-accent;
+        border-color: $color-accent;
+        box-shadow: 0 0 15px rgba($color-accent, 0.5);
+    }
+}

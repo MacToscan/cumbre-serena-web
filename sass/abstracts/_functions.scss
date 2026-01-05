@@ -1,0 +1,4 @@
+// Aquí puedes agregar funciones SCSS reutilizables
+@function rem($px) {
+  @return $px / 16 * 1rem;
+}

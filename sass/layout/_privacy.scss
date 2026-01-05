@@ -1,0 +1,90 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as *;
+
+.privacy-content {
+    max-width: 900px;
+    margin: 0 auto;
+    color: #ddd; /* Un gris claro para leer bien, pero no blanco puro */
+    padding-top: 2rem;
+    padding-bottom: 4rem;
+
+    // TÍTULO PRINCIPAL (H1)
+    h1 {
+        font-family: $font-title;
+        color: $color-accent;
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        
+        @include breakpoint(mobile) {
+            font-size: 1.8rem;
+        }
+    }
+
+    // TÍTULOS DE SECCIÓN (H2)
+    h2 {
+        font-family: $font-title; 
+        color: #fff;
+        margin-top: 4rem;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); // Línea sutil separadora
+        padding-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    // SUBTÍTULOS (H3 - Preguntas)
+    h3 {
+        font-family: $font-body;
+        color: $color-accent;
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    // PÁRRAFOS
+    p {
+        font-family: $font-body;
+        font-size: 1rem;
+        line-height: 1.8; // Importante para que no canse la vista leer textos largos
+        margin-bottom: 1rem;
+        color: $color-muted;
+        
+        strong {
+            color: #fff; // Resaltar negritas en blanco
+        }
+    }
+
+    // LISTAS
+    ul {
+        margin-left: 20px;
+        margin-bottom: 1.5rem;
+
+        li {
+            font-family: $font-body;
+            line-height: 1.7;
+            margin-bottom: 0.8rem;
+            list-style-type: disc;
+            color: $color-muted;
+            
+            strong {
+                color: $color-text;
+            }
+        }
+    }
+
+    // ENLACES DENTRO DEL TEXTO
+    a {
+        color: $color-accent;
+        text-decoration: none;
+        border-bottom: 1px solid transparent;
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: #fff;
+            border-bottom: 1px solid $color-accent;
+        }
+    }
+}

@@ -1,0 +1,43 @@
+// ==========================================
+// CURSOR PERSONALIZADO (SOLO EN HOVER)
+// ==========================================
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  background-image: url("/img/cursorclapper.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
+  pointer-events: none; // Vital para que no bloquee clicks
+  transform: translate(-50%, -50%);
+  z-index: 999999; // Siempre encima de todo
+
+  // ESTADO INICIAL: INVISIBLE (Fantasma)
+  opacity: 0; 
+  display: none; // Oculto en móvil
+
+  transition: opacity 0.15s ease, transform 0.1s ease;
+  will-change: transform, opacity;
+}
+
+// ESTADO ACTIVO (Clase que añadirá JS)
+.custom-cursor.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2) rotate(-10deg);
+}
+
+// SOLO EN ESCRITORIO
+@media (min-width: 1025px) and (hover: hover) and (pointer: fine) {
+  .custom-cursor {
+     display: block; // Existe, pero invisible (opacity 0)
+  }
+
+  // OCULTAR FLECHA NATIVA SOLO EN ENLACES
+  // (Así ves la flecha normal por el fondo, y la claqueta en los botones)
+  a, button, .btn, .card, .slider-btn, .control-btn, .menu a, .hero-arrow {
+      cursor: none !important; 
+  }
+}

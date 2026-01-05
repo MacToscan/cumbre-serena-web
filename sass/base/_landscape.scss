@@ -1,0 +1,178 @@
+/* ==========================================
+   FIX: MÓVIL EN HORIZONTAL (LANDSCAPE)
+   ------------------------------------------
+   Se activa SOLO cuando:
+   1. La pantalla está girada (landscape)
+   2. La altura es pequeña (menos de 600px, típico de móviles)
+   ========================================== */
+
+@use "../base/variables" as *;
+
+@media (orientation: landscape) and (max-height: 600px) {
+
+  /* --- 1. NAVEGACIÓN COMPACTA --- */
+  .nav {
+      position: absolute !important; // Dejar de ser fixed para ganar espacio al hacer scroll
+  }
+  
+  .menu { 
+      display: none !important; // Ocultar enlaces de texto
+  }
+
+  .hamburger {
+      display: block !important; // Forzar botón hamburguesa
+      position: absolute;
+      right: 2rem;
+      top: 1.2rem;
+  }
+  
+  // Menú desplegado: Grid de 2 columnas para aprovechar el ancho
+  .nav-toggle:checked ~ .menu {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;
+      padding: 1rem;
+      gap: 0.5rem;
+      height: auto;
+      overflow-y: auto;
+      
+      a { 
+          padding: 0.5rem; 
+          font-size: 0.9rem;
+          border-bottom: none; 
+          background: rgba(255,255,255,0.05);
+          border-radius: 4px;
+      }
+  }
+
+  /* --- 2. HERO VIDEO (Formato Cine) --- */
+  #video-intro-section {
+      height: 100vh !important; 
+      min-height: 300px;
+      
+      #bg-video {
+          width: 90% !important; 
+          height: 85vh !important;
+          border-radius: 10px;
+          top: 50% !important;
+          transform: translate(-50%, -50%) !important;
+      }
+      
+      // Textos superpuestos más pequeños
+      .video-overlay-content {
+          bottom: 15px;
+          padding-bottom: 5px;
+          
+          .replay-btn {
+               font-size: 1rem !important;
+               padding: 10px 20px !important;
+          }
+      }
+  }
+
+  /* --- 3. SECCIONES: Altura Libre --- */
+  // Quitamos la obligación de llenar la pantalla (100vh)
+  .full-width-section,
+  .full-width-section-about,
+  .full-width-section-thriller,
+  .hero {
+      min-height: auto !important; 
+      height: auto !important;
+      padding-top: 50px !important;
+      padding-bottom: 50px !important;
+  }
+  
+  // Los fondos Parallax necesitan altura mínima manual
+  .full-width-section,
+  .full-width-section-about,
+  .full-width-section-thriller {
+      min-height: 300px !important;
+  }
+
+  /* --- 4. TEXTOS Y TÍTULOS (Escalado) --- */
+  h1, .h1-hero, .hero-sticky-content h1 {
+      font-size: 1.6rem !important; 
+      margin-bottom: 0.5rem !important;
+  }
+  
+  h2 { font-size: 1.4rem !important; margin: 2rem 0 !important; }
+  
+  p, .lead, .hero-sticky-content .lead {
+      font-size: 0.95rem !important;
+      line-height: 1.4 !important;
+  }
+  
+  /* --- 5. GRID INTELIGENTE (2 Columnas) --- */
+  // Aprovechamos que la pantalla es ancha
+  .grid-2, .about .grid-2 {
+       grid-template-columns: 1fr 1fr !important; 
+       gap: 2rem !important;
+       text-align: left !important; // Resetear alineación de móvil
+       
+       // Resetear orden (Imagen a la derecha)
+       > div:first-child { order: unset !important; }
+       .about-media { order: unset !important; }
+  }
+
+  /* --- 6. PROYECTOS (Slider) --- */
+  .projects {
+      padding-top: 2rem !important;
+  }
+  .card {
+      width: 200px !important; // Tarjetas más pequeñas para que quepan
+      
+      img { height: 280px !important; }
+      
+      h3 { font-size: 1rem !important; }
+  }
+  
+  /* --- 7. EQUIPO (Grid 2 o 3 columnas) --- */
+  .grid-team {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 1rem !important;
+  }
+  .member {
+      font-size: 0.9rem !important;
+      padding: 0.8rem !important;
+      
+      img {
+          width: 120px !important;
+          height: 120px !important;
+          margin-bottom: 0.5rem !important;
+      }
+  }
+
+  /* --- 8. LIMPIEZA VISUAL (SOLUCIÓN FINAL) --- */
+  
+  // A. OCULTAR TODOS LOS FRAMES (INCLUIDO EL LOGO)
+  // En horizontal no cabe el logo gigante + texto + botones.
+  // Ocultamos el parallax para dejar el texto limpio sobre el vídeo/fondo.
+  .frame-layer {
+      display: none !important;
+  }
+  
+  // B. REAJUSTAR POSICIÓN DEL TEXTO
+  // Al quitar el logo, el texto debe subir para quedar centrado verticalmente
+  .hero-sticky-content {
+      position: relative !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      width: 100% !important;
+      
+      // ANTES tenías 100px (para dejar hueco al logo).
+      // AHORA ponemos menos para que el texto y botones queden centrados en la pantalla.
+      padding-top: 40px !important; 
+      
+      // Aseguramos que los botones se vean bien
+      .hero-actions {
+          margin-top: 1rem !important;
+      }
+  }
+  
+  // CLAQUETA DE NOMBRES (Ajuste fino)
+  .clapper-section {
+      padding: 0.5rem 1rem !important; // Menos padding vertical
+      .clapper-container img { width: 30px !important; }
+      .names li { font-size: 0.8rem !important; }
+  }
+}

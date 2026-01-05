@@ -1,0 +1,51 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as *; // Necesario para transiciones y breakpoints
+
+.footer {
+  border-top: 1px solid $color-secondary; // Un poco más sutil que 2px sólido
+  padding: 1.5rem 0;
+  background: $color-bg-alt; // Usamos la variable del sistema
+  margin-top: 0; // Un poco más de aire con la sección anterior
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center; // Centrado vertical de texto e iconos
+    gap: 1rem;
+
+    // En móvil, apilamos el contenido y centramos
+    @include breakpoint(mobile) {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      gap: 1.5rem;
+    }
+  }
+
+  p {
+    color: $color-muted;
+    font-size: 0.9rem;
+    margin: 0; // Eliminamos margen por defecto del párrafo
+  }
+
+  .socials {
+    a {
+      color: $color-secondary; // O puedes probar con $color-text si prefieres blanco
+      font-size: 1.5rem;
+      margin-left: 1.5rem;
+      display: inline-block;
+      @include transition; // Suaviza el hover
+
+      &:hover {
+        color: $color-accent;
+        transform: translateY(-3px); // Pequeña elevación elegante
+      }
+
+      // Ajuste de márgenes en móvil para que queden centrados
+      @include breakpoint(mobile) {
+        margin: 0 0.75rem;
+      }
+    }
+  }
+}

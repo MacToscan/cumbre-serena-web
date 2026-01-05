@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+  <title>Cumbre Serena World Productions | Productora de Cine Independiente</title>
+  <meta name="description" content="Productora cinematográfica especializada en el desarrollo, producción y distribución de thrillers, terror y cine fantástico. Rodajes en Pirineos y localizaciones únicas." />
+  <meta name="keywords" content="productora cine, thriller, terror, fantasía, rodajes, financiación cine, barcelona, cumbre serena">
+  <link rel="icon" href="img/favicon.png" type="image/png">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.cumbreserenaproductions.com/"> 
+  <meta property="og:title" content="Cumbre Serena World Productions">
+  <meta property="og:description" content="Productora cinematográfica independiente. Desarrollo, producción y distribución de proyectos audiovisuales únicos.">
+  <meta property="og:image" content="https://www.cumbreserenaproductions.com/img/social-share.jpg"> 
+  
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.cumbreserenaproductions.com/">
+  <meta property="twitter:title" content="Cumbre Serena World Productions">
+  <meta property="twitter:description" content="Productora cinematográfica independiente.">
+  <meta property="twitter:image" content="https://www.cumbreserenaproductions.com/img/social-share.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..700&family=Inter:wght@400..700&family=Montserrat:wght@800&family=Poppins:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="css/main.css"> <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+
+<body>
+  
+  <div id="loader-wrapper">
+    <img src="img/gifclapper.gif" alt="Cargando web productora cine" class="loader-clapper">
+    <p>CARGANDO...</p>
+  </div>
+  
+  <div class="custom-cursor"></div>
+  
+  <header class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        CUMBRE SERENA WORLD PRODUCTIONS
+        <img class="animate__animated animate__backInLeft" src="img/logo1.png" alt="Logotipo Cumbre Serena Producciones">
+      </a>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle">
+      <label for="nav-toggle" class="hamburger">☰</label>
+      <nav class="menu">
+        <a href="index.html">INICIO</a>
+        <a href="about.html">QUIÉNES SOMOS</a>
+        <a href="#projects">PROYECTOS</a>
+        <a href="team.html">EQUIPO</a>
+        <a href="#contact" class="cta">CONTACTO</a>
+      </nav>
+    </div>
+  </header>
+
+  <section id="video-intro-section">
+    <video id="bg-video" autoplay muted playsinline webkit-playsinline poster="img/logo1.png">
+        <source src="videos/entrada.mp4" type="video/mp4">
+        Tu navegador no soporta video HTML5.
+    </video>
+
+    <div class="video-controls-wrapper">
+        <button id="play-pause-btn" class="control-btn" aria-label="Pausar video">
+            <i class="fa-solid fa-pause" id="play-icon"></i>
+            <span id="play-text"></span>
+        </button>
+        <button id="sound-btn" class="control-btn" aria-label="Activar sonido">
+            <i class="fa-solid fa-volume-xmark" id="sound-icon"></i> 
+            <span id="sound-text"></span>
+        </button>
+        <button id="fullscreen-btn" class="control-btn" title="Pantalla Completa" aria-label="Pantalla completa">
+            <i class="fa-solid fa-expand"></i>
+        </button>
+    </div>
+
+    <button class="hero-arrow hero-prev" id="hero-prev" aria-label="Video anterior"><i class="fa-solid fa-chevron-left"></i></button>
+    <button class="hero-arrow hero-next" id="hero-next" aria-label="Video siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+    <button id="replay-btn" class="replay-btn" style="display: none;" aria-label="Repetir video">
+        <i class="fa-solid fa-rotate-right"></i> 
+    </button>
+
+    <div class="video-overlay-content">
+      <div id="hero-dots" class="hero-dots"></div>
+        <div class="scroll-down-hint">
+            <a href="#hero-frames" style="color: white; text-decoration: none;">Descubre más</a>
+        </div>
+        <div class="scroll-down-hint">
+          <a href="#hero-frames" style="color: white; pointer-events: auto; position: relative; z-index: 10;" aria-label="Bajar a contenido"><i class="fa-solid fa-chevron-down"></i></a>
+        </div>
+    </div>
+  </section>
+  
+
+  <section id="hero-frames" class="hero">
+    <div class="hero-sticky-content">
+        <h1>CUMBRE SERENA WORLD PRODUCTIONS</h1>
+        <p class="lead">Producción cinematográfica, desarrollo creativo y distribución internacional.</p>
+        <div class="hero-actions">
+            <a href="#projects" class="btn">Ver proyectos</a>
+            <a href="#contact" class="btn ghost">Trabaja con nosotros</a>
+        </div>
+    </div>
+    
+    <div class="image-frame-wrapper">
+        <div class="frame-layer project-frame" data-frame-id="1" style="opacity: 1;">
+            <img src="img/logo1.png" alt="Logotipo Cumbre Serena Cine">
+            <div class="scroll-indicator" id="scroll-indicator">
+                <div class="scroll-arrow"></div>
+            </div>
+        </div>
+        <div class="frame-layer project-frame" data-frame-id="2"><img src="/img/montana.webp" alt="Paisaje montañas Pirineos rodaje"></div>
+        <div class="frame-layer project-frame" data-frame-id="3"><img src="img/thriller-pic.webp" alt="Escena película thriller suspense oscuro"></div>
+        <div class="frame-layer project-frame" data-frame-id="4"><img src="img/oso-pic.webp" alt="Oso pardo naturaleza salvaje documental"></div>
+        <div class="frame-layer project-frame" data-frame-id="5"><img src="img/silla-director.webp" alt="Silla de director rodaje cine"></div>
+        <div class="frame-layer project-frame" data-frame-id="6"><img src="img/terror-pic.webp" alt="Cine de terror escena miedo"></div>
+        <div class="frame-layer project-frame" data-frame-id="7"><img src="img/rodaje-ext.webp" alt="Equipo de rodaje en exteriores"></div>
+    </div>
+  </section>
+
+  <div id="content-curtain">
+    
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2>Proyectos Cinematográficos</h2>
+        <p class="sub">Nuestros próximos estrenos y desarrollos.</p>
+        
+        <div class="slider-wrapper">
+          <button class="slider-btn prev-btn" aria-label="Anterior proyecto"><i class="fa-solid fa-chevron-left"></i></button>
+          <div class="grid-projects">
+            
+            <article class="card">
+              <a href="carneycal.html">
+              <img src="img/carneycalpic.webp" alt="Póster película terror Carne y Cal" loading="lazy" />
+              <div class="card-body">
+                <h3>CARNE Y CAL</h3>
+                <p>Terror / Misterio — 2026</p>
+                <span class="link">Ver ficha</span>
+              </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a href="elramo.html">
+              <img src="img/elramo.webp" alt="Cortometraje El Ramo cartel oficial" loading="lazy" />
+              <div class="card-body">
+                <h3>EL RAMO</h3>
+                <p>Corto — Festivales</p>
+                <span class="link">Ver ficha</span>
+              </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <img src="img/hombredelviento.webp" alt="Concept art El Hombre del Viento thriller" loading="lazy" />
+              <div class="card-body">
+                <h3>EL HOMBRE DEL VIENTO</h3>
+                <p>Thriller Drama — 2027</p>
+                <span class="link">En desarrollo</span>
+              </div>
+            </article>
+
+            <article class="card">
+              <a href="boysthatcurl.html">
+              <img src="img/doc-curling.webp" alt="Documental Boys That Curl" loading="lazy" />
+              <div class="card-body">
+                <h3>BOYS THAT CURL</h3>
+                <p>Documental</p>
+                <span class="link">Ver ficha</span>
+              </div>
+              </a>
+            </article>
+
+            <article class="card">
+              <a href="cumbreserena.html">
+              <img src="img/cumbreserena.webp" alt="Fantasía Los dos mundos de Cumbre Serena" loading="lazy" />
+              <div class="card-body">
+                <h3>LOS DOS MUNDOS DE CUMBRE SERENA</h3>
+                <p>Fantasía — Desarrollo</p>
+                <span class="link">Ver ficha</span>
+              </div>
+              </a>
+            </article>
+          </div>
+          <button class="slider-btn next-btn" aria-label="Siguiente proyecto"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="team-actions" class="full-width-section-thriller">
+      <div class="container actions-container">
+          <a href="#contact" class="action-btn btn-skew">
+              <span>TRABAJA CON NOSOTROS</span>
+          </a>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact">
+      <div class="container grid-1">
+        <div>
+          <h2>Contactar con la Productora</h2>
+        </div>
+        
+        <form class="contact-form" name="contacto-home" method="POST" data-netlify="true">
+            <input type="hidden" name="form-name" value="contacto-home" />
+
+            <label>Nombre
+                <input type="text" name="nombre" required>
+            </label>
+            <label>Email
+                <input type="email" name="email" required>
+            </label>
+            
+            <label class="antispam-trap" style="display:none;">
+                Teléfono (No rellenar)
+                <input type="text" name="telefono_hpt">
+            </label>
+            
+            <label>Mensaje
+                <textarea name="mensaje" rows="5" required></textarea>
+            </label>
+            <button class="btn" type="submit">Enviar</button>
+        </form>
+
+        <div class="contact-info">
+          <p><i class="fa-solid fa-envelope"></i> <a href="mailto:cumbreserena@info.com"> cumbreserena@info.com</a></p>
+          <p><i class="fa-solid fa-phone"></i> +34 669229400</p>
+        </div>
+        
+        <div class="legal-links-row">
+            <img class="logo-footer" src="img/logo1.png" alt="Logo Cumbre Serena Blanco" loading="lazy">
+            <img class="logo-footer" src="img/logo-dorado.png" alt="Logo Cumbre Serena Dorado" loading="lazy">
+            
+            <a href="privacy.html">Política de Privacidad</a>
+            <span class="separator">·</span>
+            <a href="legal.html">Aviso Legal</a>
+            
+            <img class="logo-footer" src="img/logo-dorado.png" alt="Logo Cumbre Serena Dorado" loading="lazy">
+            <img class="logo-footer" src="img/logo1.png" alt="Logo Cumbre Serena Blanco" loading="lazy">
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-inner">
+        <p>© Copyright <span id="year"></span> | Cumbre Serena World Productions | Productora cinematográfica </p>
+        <nav class="socials">
+          <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+          <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+        </nav>
+      </div>
+    </footer>
+  </div> 
+
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <script type="module" src="/main.js"></script>
+
+</body>
+</html>

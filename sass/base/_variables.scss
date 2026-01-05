@@ -1,0 +1,35 @@
+// --- COLORES ---
+// Teniendo en cuenta el logo de la marca
+$color-bg:        #0a0a0a;
+$color-bg-alt:    #0a0a0a;
+$color-text:      #F5F5F5;
+$color-muted:     #b0b0b0;
+$color-accent:    #00A896;
+$color-secondary: #004e92;
+$color-red:       #E64A19;
+
+// --- TIPOGRAFÍAS ---
+$font-body: 'Playfair Display', 'Montserrat', 'Cinzel', serif;
+$font-title:  'Barlow', 'Poppins', 'Inter', sans-serif;
+
+// --- LAYOUT & EFECTOS ---
+$container: 1200px;
+$glass:     rgba(255,255,255,0.06);
+
+// --- ESPACIADO ---
+$spacing-xxl: 10rem;
+$spacing-xl:  6rem;
+$spacing-l:   4rem;
+$spacing-m:   2rem;
+
+// --- UI ---
+$radius: 10px;
+$shadow: 0 4px 10px rgba(0,0,0,0.3);
+
+// --- BREAKPOINTS (Necesario para que funcionen los @media querys) ---
+$breakpoints: (
+  'mobile':  768px,
+  'tablet':  1024px,
+  'desktop': 1440px,
+  'wide':    1920px
+);

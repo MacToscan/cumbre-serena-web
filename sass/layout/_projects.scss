@@ -1,0 +1,119 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as *;
+
+// ==============================
+// SECCIÓN GENERAL PROYECTOS
+// ==============================
+.projects {
+    position: relative; 
+    z-index: 20; /* Z-index alto para cubrir los marcos fijos del Hero */
+    background-color: $color-bg; 
+    padding-top: $spacing-l;
+
+    h2 {
+        font-family: $font-title; // Corregido a fuente de título
+        color: $color-accent;
+        margin-bottom: 2rem;
+    }
+}
+
+// ==============================
+// GRID / SLIDER HORIZONTAL
+// ==============================
+.grid-projects {
+  display: flex; /* Flexbox para forzar una sola fila */
+  gap: 1.5rem;
+  padding-bottom: 2rem; 
+  
+  /* Scroll horizontal */
+  overflow-x: auto; 
+  overflow-y: hidden;
+  
+  /* Efecto de "imán" al hacer scroll */
+  scroll-snap-type: x mandatory; 
+
+  /* Ocultar barra de desplazamiento */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+  &::-webkit-scrollbar {     /* Chrome, Safari, Opera */
+    display: none;
+  }
+}
+
+// ==============================
+// CONTROLES DEL SLIDER (FLECHAS)
+// ==============================
+.slider-wrapper {
+  position: relative;
+
+  .slider-btn {
+    position: absolute;
+    top: 40%;
+    transform: translateY(-50%) translateX(-15%); // Ajuste fino de posición
+    background: rgba(0, 0, 0, 0.5); 
+    color: $color-accent;
+    border: none;
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: $radius;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+    
+    font-size: 3rem; // Tamaño de la flecha
+
+    &:hover {
+      opacity: 1;
+    }
+
+    // Posiciones específicas
+    &.prev-btn { left: 0; }
+    &.next-btn { right: 0; }
+  }
+}
+
+// ==============================
+// PÁGINA DE DETALLE DE PROYECTO
+// ==============================
+
+.top-spacer {
+    height: 1vh; 
+    background-color: transparent; 
+}
+
+.about-project {
+  margin-top: $spacing-m;
+  min-height: 100vh;
+
+  // Contenedor multimedia (Imagen o Video)
+  .about-media {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 550px;
+      width: 100%;
+
+      video, img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: contain; // Asegura que se vea entero sin recortes
+      }
+  }
+
+  // --- RESPONSIVE (TABLET/MOVIL < 900px) ---
+  @media (max-width: 900px) {
+      min-height: auto; // Evita problemas con el pinning en móvil
+
+      .grid-2 {
+          grid-template-columns: 1fr; // Una sola columna
+          gap: 2rem;
+      }
+
+      .about-media {
+          order: 2; // Baja el video/imagen debajo del texto
+          height: 50vh; // Altura adaptada a pantalla vertical
+          min-height: 250px;
+      }
+  }
+}

@@ -1,0 +1,49 @@
+// style.scss
+
+// Settings globales
+@use "settings" as *;
+
+// Base
+@use "base/error";
+@use "base/reset";
+@use "base/variables" as vars;
+@use "base/global";
+@use "base/typography";
+@use "base/animation";
+@use "base/landscape";
+
+// Layout
+@use "layout/nav";
+@use "layout/hero";
+@use "layout/footer";
+@use "layout/grid";
+@use "layout/about";
+@use "layout/projects";
+@use "layout/team";      // <-- nuevo
+@use "layout/contact"; 
+@use "layout/sections";
+@use "layout/privacy"; 
+@use "layout/legal"; // <-- nuevo
+
+// Components
+@use "components/cursor";
+@use "components/cards";
+@use "components/forms";
+@use "components/loader";
+
+
+
+// Pages
+@use "pages/home";
+@use "pages/pages";
+
+// Themes
+@use "themes/default";
+@use "themes/themes";
+
+// Utils
+@use "utils/mixins";
+@use "utils/animations";
+
+// Vendors
+@use "vendors/vendors";

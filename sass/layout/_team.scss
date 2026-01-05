@@ -1,0 +1,203 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as *;
+
+// ==============================
+// 1. GRID DEL EQUIPO
+// ==============================
+.grid-team {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 0;
+  justify-items: center;
+
+  @include breakpoint(tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint(mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team h2 {
+  font-family: $font-title; // Corregido a font-title (antes font-body)
+  color: $color-accent;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+// ==============================
+// 2. TARJETAS DE MIEMBROS
+// ==============================
+.member {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $color-accent;
+  font-size: 1.5rem;
+  text-align: center;
+  
+  background: #111; // Fondo casi negro
+  padding: 1rem;
+  border-radius: $radius;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  
+  // Efecto 3D inicial
+  transition: 0.5s ease all;
+  transform: perspective(800px) rotateX(40deg) scale(0.8);
+  opacity: 0.8;
+
+  &:hover {
+    transform: rotate(0deg) scale(1) translateY(10px);
+    opacity: 1;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.7);
+  }
+
+  img {
+    width: 190px;
+    height: 190px;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 50%;
+    
+    // Borde blanco/gris suave para evitar colores chillones
+    border: 3px solid $color-text; 
+    margin-bottom: 1rem;
+  }
+
+  h4 {
+    color: $color-accent;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: $color-muted;
+    font-size: 0.9rem;
+    padding: 0.2rem;
+    margin: 0;
+  }
+}
+
+// Ajustes específicos de fotos
+.grid-team img.marc,
+.grid-team img.gaby {
+  object-position: center;
+}
+.grid-team img.patri{
+  object-position: center 20%;
+
+}
+
+
+// ==============================
+// 3. SECCIÓN CLAQUETA (Animación)
+// ==============================
+.clapper-section {
+  padding: 4rem 2rem;
+  display: flex;
+  justify-content: center;
+  background: $color-bg;
+  overflow: hidden;
+  position: relative;
+
+  .clapper-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    // Imagen de la claqueta
+    img {
+        width: 100px; // Tamaño desktop
+        z-index: 5;
+        position: relative;
+    }
+
+    // Nombres deslizantes
+    .names-wrapper {
+      overflow: hidden;
+      width: 600px; 
+      position: relative;
+      margin-left: -1px;
+      z-index: 1;
+      // Desvanecimiento a los lados
+      mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+
+      .names {
+        display: flex;
+        white-space: nowrap;
+        animation: scrollNames 14s linear infinite;
+
+        li {
+          display: inline-block;
+          font-family: $font-body;
+          font-weight: bold;
+          font-size: 1.2rem;
+          color: $color-text;
+          margin-right: 4rem;
+        }
+      }
+    }
+  }
+}
+
+// Animación Keyframes
+@keyframes scrollNames {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-220%); }
+}
+
+
+// ==============================
+// 4. RESPONSIVE CLAQUETA
+// ==============================
+
+// Tablet
+@include breakpoint(tablet) {
+  .clapper-section {
+    justify-content: flex-start;
+    padding: 1rem;
+
+    .clapper-container {
+      img {
+        width: 50px;
+        height: auto;
+        margin-right: 1rem;
+      }
+
+      .names-wrapper {
+        width: calc(100% - 60px); 
+      }
+      
+      .names li {
+        font-size: 1rem;
+        margin-right: 2rem;
+      }
+    }
+  }
+}
+
+// Móvil
+@include breakpoint(mobile) {
+  .clapper-section {
+    justify-content: flex-start;
+    padding: 1.5rem 1rem;
+
+    .clapper-container {
+      img {
+        width: 40px;
+        height: auto;
+      }
+
+      .names-wrapper {
+        width: calc(100% - 50px);
+      }
+
+      .names li {
+        font-size: 0.9rem;
+        margin-right: 1.5rem;
+      }
+    }
+  }
+}

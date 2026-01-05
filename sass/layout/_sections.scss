@@ -1,0 +1,157 @@
+@use "../base/variables" as *;
+@use "../utils/mixins" as *;
+
+// ==========================================
+// 1. GRID GENERAL
+// ==========================================
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+
+  @include breakpoint(mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ==========================================
+// 2. BOTONES Y ACCIONES
+// ==========================================
+.actions-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    z-index: 10;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.action-btn {
+    margin: 1rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 0;
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+        width: 70%;
+    }
+}
+
+// --- EFECTO SKEW (Botón inclinado) ---
+.btn-skew {
+    position: relative;
+    overflow: hidden; 
+    transition: transform 0.3s ease-out;
+    display: inline-block; 
+    
+    span {
+        display: block;
+        padding: 1.2rem 2.5rem;
+        transition: transform 0.3s ease-out;
+        will-change: transform;
+    }
+
+    &:hover {
+        transform: translateY(-2px); 
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        
+        span {
+            transform: translateX(5px) translateY(-5px) skewX(2deg);
+        }
+    }
+
+    // Borde inferior animado
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0; left: 0; width: 100%;
+        height: 4px;
+        background-color: $color-red; 
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        transform: scaleX(0); 
+        transform-origin: left;
+    }
+
+    &:hover::after {
+        transform: scaleX(1); 
+    }
+}
+
+// ==========================================
+// 3. SECCIONES PARALLAX (TÉCNICA COMPATIBLE CON IPHONE)
+// ==========================================
+
+// A. EL CONTENEDOR (La caja que contiene texto y recorta el fondo)
+.full-width-section, 
+.full-width-section-about, 
+.full-width-section-thriller {
+    position: relative;
+    width: 100%;
+    min-height: 60vh; // Altura estándar
+    
+    // EL TRUCO PARA SAFARI:
+    // clip-path recorta la imagen fija para que no se salga
+    overflow: hidden; 
+    clip-path: inset(0); 
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    // Importante: Fondo transparente para ver el pseudo-elemento de abajo
+    background: transparent !important; 
+    
+    // Ajuste de altura para móviles
+    @media (max-width: 768px) {
+        min-height: 40vh;
+    }
+}
+
+// B. EL FONDO "FANTASMA" (Pseudo-elemento fijo)
+.full-width-section::before,
+.full-width-section-about::before,
+.full-width-section-thriller::before {
+    content: '';
+    position: fixed; // Esto crea el efecto Parallax real
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    
+    z-index: -1; // Se pone detrás del texto
+    will-change: transform; // Optimización para evitar tirones
+    pointer-events: none;
+}
+
+// ==========================================
+// 4. ASIGNACIÓN DE IMÁGENES (Rutas Correctas)
+// ==========================================
+
+// SECCIÓN TEAM / GENERAL
+.full-width-section::before {
+    background-image: url('/img/set-exterior.webp');
+}
+
+// SECCIÓN ABOUT
+.full-width-section-about::before {
+    background-image: url('/img/set-interior1.webp');
+}
+
+// SECCIÓN THRILLER (HOME)
+.full-width-section-thriller::before {
+    background-image: url('/img/set-thriller.webp');
+}

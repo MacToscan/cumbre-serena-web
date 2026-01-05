@@ -1,0 +1,113 @@
+@use "../base/variables" as *;
+
+.about {
+
+  padding-bottom: 12rem;
+  
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
+
+    // Texto a la izquierda
+    > div:first-child {
+      order: 1;
+    }
+
+    // Imagen a la derecha
+    .about-media {
+      order: 2;
+      text-align: center;
+
+      img {
+        border-radius: $radius;
+        box-shadow: 0 4px 12px rgba(30,136,229,0.5);
+        max-width: 80%;
+        height: auto;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  h2 {
+    font-family: $font-title;
+    color: $color-accent;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  p {
+    color: $color-text;
+    margin-bottom: 1.5rem;
+  }
+
+  .stats {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0; // ✅ importante para móvil
+
+    li {
+      strong {
+        display: block;
+        font-size: 1.6rem;
+        color: $color-secondary;
+      }
+
+      span {
+        color: $color-muted;
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+/* ----------------------------- */
+/* ✅ RESPONSIVE TABLET Y MÓVIL */
+/* ----------------------------- */
+@media (max-width: 900px) {
+  .about {
+    .grid-2 {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    
+
+    .about-media img {
+      max-width: 60%;
+    }
+
+    .stats {
+      justify-content: center;
+      flex-wrap: wrap; // ✅ evita que se rompa en móvil
+    }
+  }
+}
+
+
+
+/* ----------------------------- */
+/* ✅ RESPONSIVE EXTRA PEQUEÑO */
+/* ----------------------------- */
+@media (max-width: 500px) {
+  .about {
+    h2 {
+      font-size: 1.6rem;
+    }
+
+    p {
+      font-size: 0.95rem;
+    }
+
+    .about-media img {
+      max-width: 85%;
+    }
+
+    .stats {
+      flex-direction: column; // ✅ apilado perfecto en móvil
+      align-items: center;
+      gap: 1rem;
+    }
+  }
+}

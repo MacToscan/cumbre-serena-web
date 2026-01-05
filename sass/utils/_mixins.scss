@@ -1,0 +1,122 @@
+@use "../base/variables" as *;
+
+// --- FLEXBOX UTILS ---
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Alias para no repetir código (center = flex-center)
+@mixin center {
+  @include flex-center;
+}
+
+// --- TRANSICIONES ---
+@mixin transition($props: all) {
+  transition: $props 0.3s ease;
+}
+
+// --- MEDIA QUERIES ---
+// Mantenemos tus medidas específicas
+@mixin breakpoint($bp) {
+  @if $bp == 'mobile' {
+    @media (max-width: 500px) { @content; }
+  }
+  @else if $bp == 'tablet' {
+    @media (min-width: 768px) and (max-width: 900px) { @content; }
+  }
+  @else if $bp == 'desktop' {
+    @media (min-width: 1024px) { @content; }
+  }
+  @else {
+    // Por si usas una variable del mapa $breakpoints (ej: breakpoint(mobile))
+    @media (max-width: 768px) { @content; } 
+  }
+}
+
+// --- BOTONES ---
+@mixin button($bg-color: transparent, $text-color: $color-text) {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  
+  font-family: $font-body;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-decoration: none;
+  
+  // Colores base
+  color: $text-color; 
+  background-color: $color-bg;
+  border: 1px solid $text-color;
+  border-radius: 4px;
+  
+  padding: 12px 24px;
+  margin: 0.5rem;
+  cursor: pointer;
+  
+  transition: all 0.3s ease-out;
+
+  // ESTADO HOVER (El botón en sí)
+  &:hover {
+    border-color: $color-accent;
+    color: #fff; // Texto blanco
+    box-shadow: 0 0 15px rgba($color-accent, 0.3); // Brillo
+    transform: translateY(-2px); // Se eleva un poco
+  }
+
+  // LA LÍNEA INFERIOR (Pseudo-elemento)
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px; // Altura de la línea
+    background-color: $color-accent;
+    
+    // Estado inicial: invisible (escala 0)
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  // ANIMACIÓN DE LA LÍNEA AL PASAR EL RATÓN
+  &:hover::after {
+    transform: scaleX(1); // Se estira al 100%
+  }
+}
+
+// ... (El resto de tus mixins: flex-center, transition, breakpoint, button...) ...
+
+// --- MIXIN PARALLAX (FONDO FIJO) ---
+@mixin parallax-section($img-url, $height-desktop: 800px, $height-mobile: 300px) {
+    width: 100%;
+    // Importante: url(#{$img-url}) permite interpolar la variable string correctamente
+    background-image: url(#{$img-url}); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    height: $height-desktop;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 0;
+
+    // Overlay oscuro
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+        height: $height-mobile;
+    }
+}

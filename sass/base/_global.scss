@@ -1,0 +1,114 @@
+@use "../base/variables" as *;
+
+html {
+  position: relative; 
+  height: 100%; // Asegura que html ocupe toda la altura
+}
+
+html::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  
+  // Color base oscuro, para que el grano se mezcle mejor con tu fondo de body.
+  // Es mejor usar un color sólido aquí que el background-image.
+  background-color: transparent; 
+  // --- ÚLTIMA OPCIÓN: BASE64 DE ALTO CONTRASTE ---
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVQImWO0Y+N/AAAEHwFkY8eIAAAAAElFTkSuQmCC');
+  background-size: 1px 1px;
+  background-repeat: repeat;
+  // --- APLICACIÓN DEL FILTRO ---
+  // Apunta al 'id' definido en el HTML: cinematic-noise
+  //filter: url(#cinematic-noise); 
+  
+  // La opacidad controla la intensidad del grano.
+  // Empieza en 0.15 y sube o baja para ajustarlo.
+  opacity: 0.25; 
+  z-index: 9999;
+}
+
+/* Si quieres añadir la animación de grano */
+@keyframes cinematicGrain {
+  0% { background-position: 0 0; }
+  100% { background-position: 5px 5px; }
+}
+
+body {
+  position: relative;
+  font-family: $font-body;
+  background: linear-gradient(180deg, $color-bg 0%, $color-bg-alt 100%);
+  color: $color-text;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: $container;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+
+
+// 🖥️ Ajuste para monitores Ultra-Wide (opcional, si es necesario)
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1600px; /* Aumenta aún más el ancho del contenedor */
+  }
+}
+
+.section {
+  padding: $spacing-xl 0;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $font-title;
+    color: $color-text;
+    margin: 0 0 3rem 0;
+    line-height: 1.2;
+  }
+  
+  h1 {
+    text-transform: uppercase;
+  }
+
+  h2 {
+    color: $color-accent;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    text-transform: uppercase;
+  }
+
+  .sub {
+    color: $color-muted;
+    margin-bottom: 2.5rem;
+  }
+}
+
+a,
+button,
+.card,
+.btn,
+.member {
+  cursor: none !important;
+}
+
+/* Opcional: Asegúrate de que las secciones envueltas no tengan un fondo transparente 
+   si quieres usar el fondo de #content-curtain */
+
+/* Y revisa tu hero.scss para el image-frame-wrapper */
+.image-frame-wrapper {
+    position: fixed; /* Aseguramos que se mantiene fijo para el efecto */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    pointer-events: none; 
+    z-index: 10; 
+}
+
