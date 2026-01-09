@@ -85,6 +85,16 @@
   margin-top: $spacing-m;
   min-height: 100vh;
 
+p {
+  margin-bottom: $spacing-m; /* Esto separa los párrafos entre sí */
+    line-height: 1.6;      /* Esto separa las líneas de texto para que se lea mejor */
+    font-size: 1.1rem;     /* Opcional: un pelín más grande si lo ves pequeño */
+    
+    /* Para quitarle el margen al último párrafo y que no empuje lo de abajo */
+    &:last-child {
+      margin-bottom: 0;
+}}
+
   // Contenedor multimedia (Imagen o Video)
   .about-media {
       display: flex;
