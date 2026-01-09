@@ -15,7 +15,7 @@ export default defineConfig({
         // Añade aquí las fichas de películas si tienes:
         carneycal: resolve(__dirname, 'carneycal.html'),
         elramo: resolve(__dirname, 'elramo.html'),
-        boysthatcurl: resolve(__dirname, 'boysthatcurl.html'),
+        elpoder: resolve(__dirname, 'elpoder.html'),
         cumbreserena: resolve(__dirname, 'cumbreserena.html'),
       },
     },
