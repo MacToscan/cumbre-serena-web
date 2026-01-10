@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.cumbreserenaproductions.com/"> <meta property="og:title" content="Cumbre Serena World Productions">
+  <meta property="og:url" content="https://www.cumbreserena.com/"> <meta property="og:title" content="Cumbre Serena World Productions">
   <meta property="og:description" content="Productora cinematográfica independiente. Desarrollo, producción y distribución de proyectos audiovisuales únicos.">
-  <meta property="og:image" content="https://www.cumbreserenaproductions.com/img/social-share.jpg"> <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://www.cumbreserenaproductions.com/">
-  <meta property="twitter:title" content="Cumbre Serena World Productions">
-  <meta property="twitter:description" content="Productora cinematográfica independiente.">
-  <meta property="twitter:image" content="https://www.cumbreserenaproductions.com/img/social-share.jpg">
-  <title>Cumbre Serena World Productions</title>
+  <meta property="og:image" content="https://www.cumbreserena.com/img/logo-whatsapp.webp"> <meta property="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://www.cumbreserena.com/">
+  <meta name="twitter:title" content="Cumbre Serena World Productions">
+  <meta name="twitter:description" content="Productora cinematográfica independiente.">
+  <meta name="twitter:image" content="https://www.cumbreserena.com/img/logo-whatsapp.webp">
+  <title>Carne y cal | Cumbre Serena World Productions</title>
   <meta name="description" content="Productora de cine: desarrollo, producción y distribución de proyectos audiovisuales." />
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -28,7 +28,6 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
-<script type="module" src="/main.js"></script>
 <body>
   <div id="loader-wrapper">
   <img src="img/gifclapper.gif" alt="Cargando" class="loader-clapper">
@@ -147,7 +146,10 @@
     </div>
   </footer>
 
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
   <script type="module" src="/main.js"></script>
+  
   <script>
     // Se registra el plugin ScrollTrigger antes de usarlo
     gsap.registerPlugin(ScrollTrigger);
@@ -155,58 +157,14 @@
     // --- FUNCIÓN CENTRAL DEL LOADER ---
     const hideLoader = () => {
         const loader = document.getElementById('loader-wrapper');
-        // Usamos un timeout para asegurar que la clase se añada al final de la ejecución
         setTimeout(() => {
             if (loader && !loader.classList.contains('loader-hidden')) {
                 loader.classList.add('loader-hidden');
             }
-        }, 50); // Pequeño retraso para asegurar que el DOM ha cargado
+        }, 50);
     };
-    
-    // Ejecutamos el loader inmediatamente para la mayoría de los navegadores
     hideLoader(); 
-    // Y un respaldo de 1.5 segundos para forzar la desaparición si la carga se queda atascada
     setTimeout(hideLoader, 1500); 
-
-    // --- LÓGICA DE INICIALIZACIÓN INMEDIATA (Cursor, Nav, Carrusel, etc.) ---
-    
-    document.getElementById("year").textContent = new Date().getFullYear();
-    const navToggle = document.getElementById("nav-toggle");
-    document.querySelectorAll(".menu a").forEach(a => {
-        a.addEventListener("click", () => navToggle.checked = false);
-    });
-    
-    // Lógica del Cursor (Sin Cambios)
-    const cursor = document.querySelector('.custom-cursor');
-    document.addEventListener('mousemove', e => {
-        cursor.style.left = `${e.clientX}px`;
-        cursor.style.top = `${e.clientY}px`;
-    });
-    document.querySelectorAll('.card, .btn, .menu a, .brand, a, .slider-btn, .prev-btn').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.style.opacity = '1');
-        el.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-    });
-
-    // Lógica del Carrusel (Sin Cambios)
-    const gridProjects = document.querySelector('.grid-projects');
-    const nextBtn = document.querySelector('.next-btn');
-    const prevBtn = document.querySelector('.prev-btn');
-
-    if (nextBtn && prevBtn && gridProjects) {
-        const scrollProjects = (direction) => {
-            const cardWidth = 300; 
-            const gap = 32;
-            const scrollAmount = cardWidth + gap;
-            
-            gridProjects.scrollBy({
-                left: direction === 'next' ? scrollAmount : -scrollAmount,
-                behavior: 'smooth'
-            });
-        };
-        nextBtn.addEventListener('click', () => scrollProjects('next'));
-        prevBtn.addEventListener('click', () => scrollProjects('prev'));
-    }
-
 
     // -------------------------------------------------------------------
     // 💥 FASE 1: DOMContentLoaded (Inicializar GSAP y Triggers)
@@ -214,108 +172,71 @@
 
    document.addEventListener('DOMContentLoaded', () => {
 
-  const video = document.getElementById("project-video");
-  const section = document.querySelector(".about-project");
+      const video = document.getElementById("project-video");
+      const section = document.querySelector(".about-project");
 
-  if (!video || !section || typeof gsap === 'undefined') return;
+      if (!video || !section || typeof gsap === 'undefined') return;
 
-  video.muted = true;
-  video.preload = "auto";
-  video.setAttribute("playsinline", "");
-  video.setAttribute("webkit-playsinline", "");
+      video.muted = true;
+      video.preload = "auto";
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "");
 
-  // Esperamos metadata REAL
-  video.addEventListener("loadedmetadata", () => {
+      // Esperamos metadata REAL
+      video.addEventListener("loadedmetadata", () => {
 
-    ScrollTrigger.getAll().forEach(t => t.kill());
+        ScrollTrigger.getAll().forEach(t => t.kill());
 
-    gsap.set(video, {
-      opacity: 1,
-      y: 0
-    });
+        gsap.set(video, { opacity: 1, y: 0 });
 
-    video.currentTime = 0;
-    video.pause();
+        video.currentTime = 0;
+        video.pause();
 
-    ScrollTrigger.matchMedia({
-
-      // =====================
-      // 🖥 DESKTOP
-      // =====================
-      "(min-width: 901px)": () => {
-
-        gsap.to(video, {
-          currentTime: video.duration,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 40px",
-            end: "+=3000",
-            scrub: true,
-            pin: true
+        ScrollTrigger.matchMedia({
+          // 🖥 DESKTOP
+          "(min-width: 901px)": () => {
+            gsap.to(video, {
+              currentTime: video.duration,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 40px",
+                end: "+=3000",
+                scrub: true,
+                pin: true
+              }
+            });
+          },
+          // 📱 MÓVIL / TABLET
+          "(max-width: 900px)": () => {
+            gsap.to(video, {
+              currentTime: video.duration,
+              ease: "none",
+              scrollTrigger: {
+                trigger: section,
+                start: "top 80%",
+                end: "bottom 20%",
+                scrub: true,
+                pin: false
+              }
+            });
           }
         });
-
-      },
-
-      // =====================
-      // 📱 MÓVIL / TABLET
-      // =====================
-      "(max-width: 900px)": () => {
-
-        gsap.to(video, {
-          currentTime: video.duration,
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",   // empieza cuando ya lo ves
-            end: "bottom 20%",
-            scrub: true,
-            pin: false          // 🔑 CLAVE
-          }
-        });
-
-      }
+        ScrollTrigger.refresh();
+      });
     });
-
-    ScrollTrigger.refresh();
-  });
-});
 
     // -------------------------------------------------------------------
     // 💥 FASE 2: window.load (ScrollReveal y Refresh Final)
     // -------------------------------------------------------------------
 
     window.addEventListener('load', () => {
-        
-        // Forzar un refresh del ScrollTrigger para recalcular posiciones
-        if (typeof ScrollTrigger !== 'undefined') {
-            ScrollTrigger.refresh();
-        }
+        if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
 
-        // Inicialización de ScrollReveal (Resto de las animaciones)
         if (typeof ScrollReveal !== 'undefined') {
-            
-            ScrollReveal().reveal('.about-project .grid-2', { 
-                delay: 200,
-                distance: '50px',
-                origin: 'bottom',
-                easing: 'ease-in-out'
-            });
-
-            ScrollReveal().reveal('#otros-proyectos .slider-wrapper', {
-                delay: 500,
-                distance: '30px',
-                origin: 'bottom',
-                easing: 'ease-in-out'
-            });
-
-            ScrollReveal().reveal('footer', { 
-                delay: 100,
-                distance: '50px',
-                origin: 'bottom',
-                easing: 'ease-in-out'
-            });
+            ScrollReveal().reveal('.about-project .grid-2', { delay: 200, distance: '50px', origin: 'bottom', easing: 'ease-in-out' });
+            ScrollReveal().reveal('#otros-proyectos .slider-wrapper', { delay: 500, distance: '30px', origin: 'bottom', easing: 'ease-in-out' });
+            ScrollReveal().reveal('footer', { delay: 100, distance: '50px', origin: 'bottom', easing: 'ease-in-out' });
         }
     });
 </script>

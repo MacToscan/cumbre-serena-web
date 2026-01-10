@@ -4,14 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.cumbreserenaproductions.com/"> <meta property="og:title" content="Cumbre Serena World Productions">
+  <meta property="og:url" content="https://www.cumbreserena.com/"> <meta property="og:title" content="Cumbre Serena World Productions">
   <meta property="og:description" content="Productora cinematográfica independiente. Desarrollo, producción y distribución de proyectos audiovisuales únicos.">
-  <meta property="og:image" content="https://www.cumbreserenaproductions.com/img/social-share.jpg"> <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://www.cumbreserenaproductions.com/">
+  <meta property="og:image" content="https://www.cumbreserena.com/img/logo-whatsapp.webp"> <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.cumbreserena.com/">
   <meta property="twitter:title" content="Cumbre Serena World Productions">
   <meta property="twitter:description" content="Productora cinematográfica independiente.">
-  <meta property="twitter:image" content="https://www.cumbreserenaproductions.com/img/social-share.jpg">
-  <title>Cumbre Serena World Productions</title>
+  <meta property="twitter:image" content="https://www.cumbreserena.com/img/logo-whatsapp.webp">
+  <title>Team | Cumbre Serena World Productions</title>
   <meta name="description" content="Productora de cine: desarrollo, producción y distribución de proyectos audiovisuales." />
   <link rel="icon" href="img/favicon.png" type="image/png">
   <link rel="stylesheet" href="css/main.css">
@@ -62,7 +62,7 @@
     <div class="container">
       <h2>Nuestro equipo</h2>
       <p class="sub">Cumbre Serena World Productions es una productora y desarrollo creativo, con experiencia en cine y televisión, donde nuestro objetivo es materializar ideas creativas en proyectos de calidad y de relevancia social.</p>
-      <p class="sub">Trabajamos con un grupo crativo y talentoso de guionistas, productores y directores para crear y desarrollar historias que nos apasionan.</p>
+      <p class="sub">Trabajamos con un grupo creativo y talentoso de guionistas, productores y directores para crear y desarrollar historias que nos apasionan.</p>
       <!--<div class="img-rec">
         <img width="40%" src="img/set-int.png" alt="">
         <img width="40%" src="img/set-int2.png" alt="">
@@ -182,8 +182,8 @@
       </form>
 
       <div class="contact-info">
-        <p><i class="fa-solid fa-envelope"></i> <a href=""> cumbreserena@info.com</a></p>
-        <p><i class="fa-solid fa-phone"></i> +34 669229400</p>
+        <p><i class="fa-solid fa-envelope"></i> <a href="mailto:cumbreserenawp@cumbreserena.com"> cumbreserenawp@cumbreserena.com</a></p>
+        <p><i class="fa-solid fa-phone"></i> +34 622360554</p>
       </div>
       <div class="legal-links-row">
             <img class="logo-footer" src="img/logo1.png" alt="logo-dorado">
@@ -210,109 +210,9 @@
     </div>
   </footer>
 
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
   <script type="module" src="/main.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-
-        // ===========================================================
-        // 1. LÓGICA DE MENÚ ACTIVO (DETECTA PÁGINA ACTUAL)
-        // ===========================================================
-        const menuItems = document.querySelectorAll('.nav .menu a');
-        
-        // Obtenemos el nombre del archivo (ej: "team.html")
-        let currentPage = window.location.pathname.split("/").pop();
-        
-        // Si está vacío (estamos en la raíz), es index.html
-        if (currentPage === "") currentPage = "index.html";
-
-        menuItems.forEach(item => {
-            // Obtenemos el href del enlace (ej: "team.html")
-            const itemHref = item.getAttribute('href');
-
-            // Limpiamos el href de posibles anclas o espacios (ej: "index.html #projects" -> "index.html")
-            const cleanHref = itemHref.split(' ')[0]; 
-
-            // COMPARACIÓN:
-            if (cleanHref === currentPage) {
-                item.classList.add('active');
-            }
-        });
-
-
-        // ===========================================================
-        // 2. LÓGICA DE INICIALIZACIÓN (Cursor, Nav, Footer)
-        // ===========================================================
-        
-        // Año automático en footer
-        const yearSpan = document.getElementById("year");
-        if(yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-        // Cierre de menú móvil al hacer click
-        const navToggle = document.getElementById("nav-toggle");
-        if(navToggle){
-            document.querySelectorAll(".menu a").forEach(a => {
-                a.addEventListener("click", () => navToggle.checked = false);
-            });
-        }
-        
-        // Cursor personalizado
-        const cursor = document.querySelector('.custom-cursor');
-        if(cursor) {
-            document.addEventListener('mousemove', e => {
-                cursor.style.left = `${e.clientX}px`;
-                cursor.style.top = `${e.clientY}px`;
-            });
-            // Elementos interactivos
-            document.querySelectorAll('.card, .btn, .menu a, .brand, a, .member').forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.style.opacity = '1');
-                el.addEventListener('mouseleave', () => cursor.style.opacity = '0');
-            });
-        }
-    });
-
-
-    // ===========================================================
-    // 3. CARGA Y ANIMACIONES (LOADER & SCROLLREVEAL)
-    // ===========================================================
-
-    window.addEventListener('load', () => {
-        const loader = document.getElementById('loader-wrapper');
-        
-        // Ocultar Loader
-        if (loader) {
-            loader.classList.add('loader-hidden'); 
-        }
-
-        // Inicializar ScrollReveal
-        if (typeof ScrollReveal !== 'undefined') {
-            
-            // Títulos
-            ScrollReveal().reveal('#team h2, #team p.sub', {
-                delay: 200,
-                distance: '40px',
-                origin: 'bottom',
-                interval: 100,
-                easing: 'ease-in-out'
-            });
-
-            // Claqueta (bloque entero)
-            ScrollReveal().reveal('.clapper-section', {
-                delay: 400,
-                distance: '30px',
-                origin: 'bottom',
-                easing: 'ease-in-out'
-            });
-
-
-            // Contacto
-            ScrollReveal().reveal('#contact', {
-                delay: 200, 
-                distance: '50px',
-                origin: 'bottom',
-                easing: 'ease-in-out'
-            });
-        }
-    });
-</script>
+  
 </body>
 </html>

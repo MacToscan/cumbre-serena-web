@@ -62,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
             touchMultiplier: 2,
         });
 
+
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
@@ -201,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
             cursor.style.left = `${e.clientX}px`;
             cursor.style.top = `${e.clientY}px`;
         });
-        const interactiveSelectors = '.card, .btn, .menu a, .brand, a, .slider-btn, .prev-btn, .sound-toggle-btn, .replay-btn, .hero-arrow, .control-btn';
+        const interactiveSelectors = '.card, .btn, .menu a, .brand, a, .slider-btn, .prev-btn, .sound-toggle-btn, .replay-btn, .hero-arrow, .control-btn, .member';
         document.querySelectorAll(interactiveSelectors).forEach(el => {
             el.addEventListener('mouseenter', () => cursor.style.opacity = '1');
             el.addEventListener('mouseleave', () => cursor.style.opacity = '0');
