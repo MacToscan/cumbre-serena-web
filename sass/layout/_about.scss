@@ -1,67 +1,31 @@
 @use "../base/variables" as *;
 
 .about {
-
-  padding-bottom: 12rem;
-  
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    align-items: center;
-
-    // Texto a la izquierda
-    > div:first-child {
-      order: 1;
-    }
-
-    // Imagen a la derecha
-    .about-media {
-      order: 2;
-      text-align: center;
-
-      img {
-        border-radius: $radius;
-        box-shadow: 0 4px 12px rgba(30,136,229,0.5);
-        max-width: 80%;
-        height: auto;
-        margin: 0 auto;
-      }
-    }
-  }
-
-  h2 {
-    font-family: $font-title;
-    color: $color-accent;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-  }
-
-  p {
-    color: $color-text;
-    margin-bottom: 1.5rem;
-  }
+  margin-top: 2rem;
+  padding-bottom: 0;
 
   .stats {
     display: flex;
+    justify-content: space-between;
     gap: 2rem;
-    list-style: none;
-    padding: 0; // ✅ importante para móvil
 
-    li {
-      strong {
-        display: block;
-        font-size: 1.6rem;
-        color: $color-secondary;
+    .stat-item {
+      text-align: center;
+
+      h3 {
+        font-size: 1.5rem;
+        color: $color-accent;
+        margin-bottom: 0.5rem;
       }
 
-      span {
-        color: $color-muted;
-        font-size: 0.9rem;
+      p {
+        font-size: 1rem;
+        
       }
     }
   }
 }
+
 
 /* ----------------------------- */
 /* ✅ RESPONSIVE TABLET Y MÓVIL */

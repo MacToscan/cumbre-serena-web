@@ -148,10 +148,29 @@
 
 // SECCIÓN ABOUT
 .full-width-section-about::before {
-    background-image: url('/img/set-interior1.webp');
+    background-image: url('img/set-exterior.webp');
 }
 
 // SECCIÓN THRILLER (HOME)
 .full-width-section-thriller::before {
     background-image: url('/img/set-thriller.webp');
+}
+
+.legal-links-row {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    padding: auto;
+
+    a {
+        color: $color-text;
+        text-decoration: none;
+        font-size: 0.7rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }

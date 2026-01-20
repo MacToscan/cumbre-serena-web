@@ -16,14 +16,15 @@
   }
 
   @include breakpoint(mobile) {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr); // ✅ AHORA SON 2 COLUMNAS
+    gap: 1rem; // Reducimos el hueco para que quepan bien
   }
 }
 
 .team h2 {
-  font-family: $font-title; // Corregido a font-title (antes font-body)
+  font-family: $font-title;
   color: $color-accent;
-  margin-top: 3rem;
+  margin-top: 0.5rem;
   margin-bottom: 3rem;
 }
 
@@ -38,12 +39,12 @@
   font-size: 1.5rem;
   text-align: center;
   
-  background: #111; // Fondo casi negro
+  background: #111; 
   padding: 1rem;
   border-radius: $radius;
   box-shadow: 0 4px 10px rgba(0,0,0,0.5);
   
-  // Efecto 3D inicial
+  // Efecto 3D inicial (SOLO DESKTOP/TABLET)
   transition: 0.5s ease all;
   transform: perspective(800px) rotateX(40deg) scale(0.8);
   opacity: 0.8;
@@ -54,6 +55,17 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.7);
   }
 
+  // ✅ RESET PARA MÓVIL (Sin efectos, planas y más pequeñas)
+  @include breakpoint(mobile) {
+    transform: none !important; // Quita la rotación 3D
+    opacity: 1 !important;      // Totalmente visibles
+    transition: none;           // Sin animación
+    padding: 0.5rem;            // Menos relleno
+    
+    // Al quitar el hover en táctil, aseguramos que se vean bien siempre
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5); 
+  }
+
   img {
     width: 190px;
     height: 190px;
@@ -61,14 +73,27 @@
     object-position: top;
     border-radius: 50%;
     
-    // Borde blanco/gris suave para evitar colores chillones
     border: 3px solid $color-text; 
     margin-bottom: 1rem;
+
+    // ✅ FOTO MÁS PEQUEÑA EN MÓVIL
+    @include breakpoint(mobile) {
+      width: 100px;
+      height: 100px;
+      margin-bottom: 0.5rem;
+      border-width: 2px;
+    }
   }
 
   h4 {
     color: $color-accent;
     margin-bottom: 0.5rem;
+
+    // Texto nombre más pequeño en móvil
+    @include breakpoint(mobile) {
+      font-size: 0.9rem; 
+      margin-bottom: 0.2rem;
+    }
   }
 
   p {
@@ -76,6 +101,12 @@
     font-size: 0.9rem;
     padding: 0.2rem;
     margin: 0;
+
+    // Cargo más pequeño en móvil
+    @include breakpoint(mobile) {
+      font-size: 0.7rem; 
+      line-height: 1.2;
+    }
   }
 }
 
@@ -86,7 +117,6 @@
 }
 .grid-team img.patri{
   object-position: center 20%;
-
 }
 
 
@@ -108,7 +138,7 @@
 
     // Imagen de la claqueta
     img {
-        width: 100px; // Tamaño desktop
+        width: 100px; 
         z-index: 5;
         position: relative;
     }
@@ -120,7 +150,6 @@
       position: relative;
       margin-left: -1px;
       z-index: 1;
-      // Desvanecimiento a los lados
       mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
       -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
 
