@@ -8,7 +8,6 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         about: resolve(__dirname, 'about.html'),
-        team: resolve(__dirname, 'team.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         legal: resolve(__dirname, 'legal.html'),
         error404: resolve(__dirname, '404.html'),
